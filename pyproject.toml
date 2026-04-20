@@ -1,22 +1,29 @@
 [project]
-name = "projet-sc"
+name = "supplychain-lots"
 version = "0.1.0"
-description = "Add your description here"
+description = "Librairie Python pour résoudre des problèmes d'achat de lots fractionnables en programmation linéaire"
 readme = "README.md"
-authors = [
-    { name = "Bastien Barthélémy", email = "email@exemple.com" }
-]
-requires-python = ">=3.13"
-dependencies = [
-    "jupyter>=1.1.1",
-    "matplotlib>=3.10.8",
-    "pandas>=3.0.2",
-    "pulp>=3.3.0",
-]
+requires-python = ">=3.10"
+dependencies = ["pulp>=2.7"]
 
-[project.scripts]
-projet-sc = "projet_sc:main"
+[project.optional-dependencies]
+dev = ["ruff", "mypy", "pytest", "pytest-cov"]
 
 [build-system]
-requires = ["uv_build>=0.11.7,<0.12.0"]
-build-backend = "uv_build"
+requires = ["setuptools>=45", "wheel", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["supplychain_lots"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+"*" = ["*.py"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
