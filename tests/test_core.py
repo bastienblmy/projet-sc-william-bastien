@@ -3,6 +3,7 @@ Tests unitaires pour la classe LotProblem du package supplychain_lots.
 """
 
 import pytest
+
 from supplychain_lots.core import LotProblem
 
 
