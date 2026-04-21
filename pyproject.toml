@@ -4,8 +4,11 @@ version = "0.1.0"
 description = "Librairie pour résoudre des problèmes d'achat de lots fractionnables en programmation linéaire"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["pulp>=2.7",
-                "numpy>=1.21"]
+dependencies = [
+    "pulp>=2.7",
+    "numpy>=1.21",
+    "typer",
+]
 
 [project.optional-dependencies]
 dev = ["ruff", "mypy", "pytest", "pytest-cov"]
@@ -36,3 +39,6 @@ warn_unused_ignores = true
 minversion = "6.0"
 addopts = "--cov=supplychain_lots --cov-report=term-missing"
 testpaths = ["tests"]
+
+[project.scripts]
+supplychain-lots = "supplychain_lots.cli:main"
