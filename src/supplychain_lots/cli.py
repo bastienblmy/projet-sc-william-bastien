@@ -1,27 +1,31 @@
 """
-CLI minimaliste pour supplychain-lots.
+CLI simple et fonctionnelle pour supplychain-lots.
 """
 
-import typer
 import json
 from pathlib import Path
 
+import typer
+
 from supplychain_lots.core import LotProblem
 
+
 def main():
-    """Point d'entrée simple pour la CLI."""
+    """Point d'entrée simple de la CLI."""
     typer.echo("=== Supplychain-lots CLI ===\n")
 
-    # Demande interactive du fichier
-    input_path = typer.prompt("Entrez le chemin du fichier JSON", default="example.json")
+    input_path = typer.prompt(
+        "Entrez le chemin du fichier JSON",
+        default="example.json"
+    )
 
     path = Path(input_path)
     if not path.exists():
-        typer.secho(f"Erreur : Le fichier {path} n'existe pas.", fg=typer.colors.RED)
+        typer.secho(f"Erreur : Fichier non trouvé → {path}", fg=typer.colors.RED)
         raise typer.Exit(1)
 
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             data = json.load(f)
 
         problem = LotProblem(
@@ -33,11 +37,15 @@ def main():
 
         print(problem.get_solution_summary())
 
-        typer.secho(f"\n✓ Résolution terminée - Coût total : {problem.objective_value:.2f} M$", fg=typer.colors.GREEN)
+        typer.secho(
+            f"\n✓ Résolution terminée - Coût total : {problem.objective_value:.2f} M$",
+            fg=typer.colors.GREEN,
+            bold=True
+        )
 
     except Exception as e:
         typer.secho(f"Erreur lors de la résolution : {e}", fg=typer.colors.RED)
-        raise typer.Exit(1)
+        raise typer.Exit(1) from e
 
 
 if __name__ == "__main__":

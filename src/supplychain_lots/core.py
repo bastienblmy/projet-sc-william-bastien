@@ -8,9 +8,11 @@ les problèmes d'achat de lots fractionnables.
 
 from __future__ import annotations
 
-import pulp # type: ignore
-import numpy as np
 from typing import Any
+
+import numpy as np
+import pulp  # type: ignore
+
 
 class LotProblem:
     """
@@ -75,9 +77,10 @@ class LotProblem:
             self.solve()
 
         summary = f"\n=== Solution : {self.name} ===\n"
-        summary += f"Statut           : Optimal\n"
+        summary += "Statut           : Optimal\n"
         summary += f"Coût total       : {self._objective_value:.2f} M$\n"
         summary += "Quantités optimales de lots :\n"
+
         for i, qty in enumerate(self._solution or [], 1):
             summary += f"   Lot {i:2d}      : {qty:.4f}\n"
 
